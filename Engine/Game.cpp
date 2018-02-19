@@ -69,10 +69,10 @@ void Game::PossiblyDamage(User& usr, std::vector<Entity>& Entities)
 {
 	for (int Index = 0; Index < Entities.size(); Index++)
 	{
-		if (   Entities[Index].entityvec.GetX() + Entities[Index].Width > usr.usrvec.GetX()
-			&& Entities[Index].entityvec.GetX() < usr.usrvec.GetX() + usr.Width
-			&& Entities[Index].entityvec.GetY() < usr.usrvec.GetY() + usr.Height
-			&& Entities[Index].entityvec.GetY() + Entities[Index].Height > usr.usrvec.GetY()
+		if (Entities[Index].entityvec.GetX() + Entities[Index].Width > usr.GetX()
+			&& Entities[Index].entityvec.GetX() < usr.GetX() + usr.GetWidth()
+			&& Entities[Index].entityvec.GetY() < usr.GetY() + usr.GetHeight()
+			&& Entities[Index].entityvec.GetY() + Entities[Index].Height > usr.GetY()
 			&& wnd.mouse.LeftIsPressed()
 			)
 		{
@@ -83,7 +83,7 @@ void Game::PossiblyDamage(User& usr, std::vector<Entity>& Entities)
 
 void Game::HandleDeaths(const User& usr, std::vector<Entity>& Entities)
 {
-	if (usr.IsAlive == false)
+	if (usr.IsUserAlive() == false)
 	{
 		GameOver = true;
 	}
