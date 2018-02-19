@@ -13,6 +13,10 @@ public:
 	MyVec2& operator*=(const float rhs);
 	float GetX() const;
 	float GetY() const;
+	float GetLength() const;
+	float GetLengthSq() const;
+	MyVec2 GetNormalized();
+	MyVec2& Normalize();
 public:
 	float x;
 	float y;

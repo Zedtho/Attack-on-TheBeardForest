@@ -25,8 +25,10 @@ private:
 
 	int Health = 100;
 	bool IsAlive = true;
+
 	//Functions
 private:
+	//Logic
 	bool Move(MainWindow& wnd, float dt);
 	bool CheckIfAlive();
 
@@ -34,6 +36,7 @@ public:
 	void Draw(Graphics& gfx, float dt);
 	void TakeDamage(int DamageGiven);
 	void Update(MainWindow& kbd);
+
 	//Getters
 	float GetX() const;
 	float GetY() const;
@@ -41,7 +44,7 @@ public:
 	int GetHeight() const;
 	bool IsUserAlive() const;
 
-
+	//Classes
 	enum class DIRSTATE
 	{
 		WEST = 'A', EAST = 'D', NORTH = 'W', SOUTH = 'S', NORTHWEST = 'WA', NORTHEAST = 'WD', SOUTHWEST = 'SA', SOUTHEAST = 'SD'
@@ -58,6 +61,7 @@ public:
 	/*static const StandingState stdstate;
 	static const RunningState rngstate;
 	UserState* StateOfMovement = *stdstate;*/
+	// Graphics
 private:
 
 	AlphaSprite SouthStanding = AlphaSprite("Images/South/Alpha_Character_South_Standing.png");
