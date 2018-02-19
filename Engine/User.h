@@ -8,6 +8,9 @@
 #include "AlphaSprite.h"
 #include "AnimatedSprite.h"
 
+
+
+
 class User
 {
 public:
@@ -75,9 +78,7 @@ class UserState
 {
 	virtual void Update(float dt, User& user, MainWindow& wnd) = 0;
 	virtual void Draw() {};
-	virtual void Move() {
-		
-		}
+	virtual void Move() {};
 	virtual bool HandleInput() {};
 	//Roses are red
 	//Violets are blue
@@ -141,7 +142,7 @@ class RunningState : UserState
 					}
 					else
 					{
-						user.StateOfMovement = StandingState();
+						user.StateOfMovement = User::MOVSTATE::STANDING ;
 					}
 	}
 	virtual void Move(User& user, float dt)
@@ -243,3 +244,4 @@ class StandingState : UserState
 	}
 	
 };
+

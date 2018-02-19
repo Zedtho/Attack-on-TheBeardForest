@@ -62,6 +62,7 @@ void Game::ComposeFrame()
 		Entities[Index].Draw(gfx);
 	}
 	usr.Draw(gfx, dt);
+
 }
 
 void Game::PossiblyDamage(User& usr, std::vector<Entity>& Entities)

@@ -84,6 +84,7 @@ void Graphics::PutPixelAlpha( int X, int Y, Color C )
 }
 
 
+
 //////////////////////////////////////////////////
 //           Graphics Exception
 Graphics::Exception::Exception( HRESULT hr, const std::wstring& note, const wchar_t* file, unsigned int line )

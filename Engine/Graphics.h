@@ -202,6 +202,7 @@ public:
 	void PutPixel( int x,int y,Color c );
 	void PutPixelAlpha( int X, int Y, Color C );
 	
+	
 private:
 	Direct3D			m_direct3d;
 	aligned_ptr<Color>	pSysBuffer;
