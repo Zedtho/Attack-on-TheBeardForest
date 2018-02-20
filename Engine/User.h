@@ -22,7 +22,7 @@ private:
 	//NOTE FOR SELF:: Possibly Rectangle is useful?
 
 	FrameTimer usrft;
-	float Speed = 250;
+	float Speed = 300;
 
 	int Health = 100;
 	bool IsAlive = true;
