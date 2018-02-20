@@ -248,6 +248,7 @@ bool User::Move(MainWindow& wnd, float dt)
 
 	}
 	const float velocity = Speed * dt;
+	const float velocityindiagonals = Speed * dt / Sqrtof2;
 	switch (Direction)
 	{
 	case DIRSTATE::NORTH:
@@ -255,16 +256,33 @@ bool User::Move(MainWindow& wnd, float dt)
 		UserRect.bottom -= velocity;
 		break;
 	case DIRSTATE::NORTHWEST:
+		UserRect.top -= velocityindiagonals;
+		UserRect.bottom -= velocityindiagonals;
+		UserRect.left -= velocityindiagonals;
+		UserRect.right -= velocityindiagonals;
 		break;
 	case DIRSTATE::NORTHEAST:
+		UserRect.top -= velocityindiagonals;
+		UserRect.bottom -= velocityindiagonals;
+		UserRect.left += velocityindiagonals;
+		UserRect.right += velocityindiagonals;
 		break;
 	case DIRSTATE::SOUTH:
 		UserRect.top += velocity;
 		UserRect.bottom += velocity;
 		break;
 	case DIRSTATE::SOUTHWEST:
+		UserRect.top += velocityindiagonals;
+		UserRect.bottom += velocityindiagonals;
+		UserRect.left -= velocityindiagonals;
+		UserRect.right -= velocityindiagonals;
+
 		break;
 	case DIRSTATE::SOUTHEAST:
+		UserRect.top += velocityindiagonals;
+		UserRect.bottom += velocityindiagonals;
+		UserRect.left += velocityindiagonals;
+		UserRect.right += velocityindiagonals;
 		break;
 	case DIRSTATE::WEST:
 		UserRect.left -= velocity;
