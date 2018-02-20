@@ -247,6 +247,7 @@ bool User::Move(MainWindow& wnd, float dt)
 		return false;
 
 	}
+	constexpr static float Sqrtof2 = 1.41421356237f;
 	const float velocity = Speed * dt;
 	const float velocityindiagonals = Speed * dt / Sqrtof2;
 	switch (Direction)

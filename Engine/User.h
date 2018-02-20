@@ -26,7 +26,6 @@ private:
 	FrameTimer usrft;
 	float Speed = 300;
 	
-	constexpr static float Sqrtof2 = 1.41421356237f;
 
 	float Health = 100;
 	bool IsAlive = true;
