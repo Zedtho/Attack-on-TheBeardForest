@@ -16,10 +16,11 @@ class User
 	//Data
 private:
 
-	constexpr static int Width = 60;
-	constexpr static int Height = 100;
-
+	constexpr static float Width = 60;
+	constexpr static float Height = 100;
 	MyVec2 Uservec{ Graphics::ScreenWidth / 2 - Width / 2, Graphics::ScreenHeight / 2 - Height / 2 };
+	//NOTE FOR SELF:: Possibly Rectangle is useful?
+
 	FrameTimer usrft;
 	float Speed = 250;
 
@@ -40,8 +41,8 @@ public:
 	//Getters
 	float GetX() const;
 	float GetY() const;
-	int GetWidth() const;
-	int GetHeight() const;
+	float GetWidth() const;
+	float GetHeight() const;
 	bool IsUserAlive() const;
 
 	//Classes
@@ -53,7 +54,6 @@ public:
 	enum class MOVSTATE {
 		SPRINTING, FIGHTING, STANDING
 	};
-
 
 
 	DIRSTATE Direction = DIRSTATE::NORTH;
@@ -83,6 +83,7 @@ private:
 public:
 	User() = default;
 	User(const float Given_x, const float Given_y);
+	//Statemachine (in progress, not implemented
 	class UserState
 	{
 		virtual void Update(float dt, User& user, MainWindow& wnd) = 0;
@@ -96,6 +97,7 @@ public:
 
 
 	};
+
 	class RunningState : UserState
 	{
 		virtual void Update(float dt, User& user, MainWindow& wnd)
@@ -189,6 +191,7 @@ public:
 		}
 
 	};
+
 	class StandingState : UserState
 	{
 		virtual void Update(float dt, User& user, MainWindow& wnd)

@@ -69,10 +69,10 @@ void Game::PossiblyDamage(User& usr, std::vector<Entity>& Entities)
 {
 	for (int Index = 0; Index < Entities.size(); Index++)
 	{
-		if (Entities[Index].entityvec.GetX() + Entities[Index].Width > usr.GetX()
-			&& Entities[Index].entityvec.GetX() < usr.GetX() + usr.GetWidth()
-			&& Entities[Index].entityvec.GetY() < usr.GetY() + usr.GetHeight()
-			&& Entities[Index].entityvec.GetY() + Entities[Index].Height > usr.GetY()
+		if (Entities[Index].GetX() + Entities[Index].GetWidth() > usr.GetX()
+			&& Entities[Index].GetX() < usr.GetX() + usr.GetWidth()
+			&& Entities[Index].GetY() < usr.GetY() + usr.GetHeight()
+			&& Entities[Index].GetY() + Entities[Index].GetHeight() > usr.GetY()
 			&& wnd.mouse.LeftIsPressed()
 			)
 		{

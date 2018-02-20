@@ -314,12 +314,12 @@ float User::GetY() const
 	return Uservec.GetY();
 }
 
-int User::GetWidth() const
+float User::GetWidth() const
 {
 	return Width;
 }
 
-int User::GetHeight() const
+float User::GetHeight() const
 {
 	return Height;
 }
