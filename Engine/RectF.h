@@ -1,15 +1,22 @@
 #pragma once
-#include "MyVec2.h"
+
+#include "Vec2.h"
+
 class RectF
 {
+public:
+	RectF() = default;
+	RectF( float left_in,float right_in,float top_in,float bottom_in );
+	RectF( const Vec2& topLeft,const Vec2& bottomRight );
+	RectF( const Vec2& topLeft,float width,float height );
+	bool IsOverlappingWith( const RectF& other ) const;
+	bool IsContainedBy( const RectF& other ) const;
+	static RectF FromCenter( const Vec2& center,float halfWidth,float halfHeight );
+	RectF GetExpanded( float offset ) const;
+	Vec2 GetCenter() const;
+public:
 	float left;
 	float right;
 	float top;
 	float bottom;
-	RectF() = default;
-	RectF(const float in_left, const float in_right, const float in_top, const float in_bottom);
-	RectF(const MyVec2& TopLeft, const MyVec2& BottomRight);
-	RectF(const MyVec2& TopLeft, const float Width, const float Height);
-	static RectF FromCenter(const MyVec2& Center, float HalfWidth, float HalfHeight);
-	bool IsOverlappingWith(const RectF& other) const;
 };

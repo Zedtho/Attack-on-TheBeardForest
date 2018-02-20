@@ -1,31 +1,50 @@
 #include "RectF.h"
 
-RectF::RectF(const float in_left, const float in_right, const float in_top, const float in_bottom)
+RectF::RectF( float left_in,float right_in,float top_in,float bottom_in )
+	:
+	left( left_in ),
+	right( right_in ),
+	top( top_in ),
+	bottom( bottom_in )
 {
-	left = in_left;
-	right = in_right;
-	top = in_top;
-	bottom = in_bottom;
 }
 
-RectF::RectF(const MyVec2& TopLeft, const MyVec2& BottomRight)
+RectF::RectF( const Vec2& topLeft,const Vec2 & bottomRight )
+	:
+	RectF( topLeft.x,bottomRight.x,topLeft.y,bottomRight.y )
 {
-	RectF(TopLeft.GetX(), BottomRight.GetX(), TopLeft.GetY(), BottomRight.GetY());
 }
 
-RectF::RectF(const MyVec2& TopLeft, const float Width, const float Height)
+RectF::RectF( const Vec2& topLeft,float width,float height )
+	:
+	RectF( topLeft,topLeft + Vec2( width,height ) )
 {
-	RectF(TopLeft.GetX(), TopLeft.GetX() + Width, TopLeft.GetY(), TopLeft.GetY() + Height);
 }
 
-RectF RectF::FromCenter(const MyVec2 & Center, float HalfWidth, float HalfHeight)
+bool RectF::IsOverlappingWith( const RectF& other ) const
 {
-	return RectF(Center.GetX() - HalfWidth, Center.GetX() + HalfWidth, Center.GetY() - HalfHeight, Center.GetY() + HalfHeight);
+	return right > other.left && left < other.right
+		&& bottom > other.top && top < other.bottom;
 }
 
-bool RectF::IsOverlappingWith(const RectF & other) const
+bool RectF::IsContainedBy( const RectF & other ) const
 {
-	return left < other.right && right > other.left && top < other.bottom && bottom > other.top;
+	return left >= other.left && right <= other.right &&
+		top >= other.top && bottom <= other.bottom;
 }
 
+RectF RectF::FromCenter( const Vec2 & center,float halfWidth,float halfHeight )
+{
+	const Vec2 half( halfWidth,halfHeight );
+	return RectF( center - half,center + half );
+}
 
+RectF RectF::GetExpanded( float offset ) const
+{
+	return RectF( left - offset,right + offset,top - offset,bottom + offset );
+}
+
+Vec2 RectF::GetCenter() const
+{
+	return Vec2( (left + right) / 2.0f,(top + bottom) / 2.0f );
+}
