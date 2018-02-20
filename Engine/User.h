@@ -18,13 +18,14 @@ private:
 
 	constexpr static float Width = 60;
 	constexpr static float Height = 100;
-	MyVec2 Uservec{ Graphics::ScreenWidth / 2 - Width / 2, Graphics::ScreenHeight / 2 - Height / 2 };
-	//NOTE FOR SELF:: Possibly Rectangle is useful?
+
+	RectF UserRect{ Graphics::ScreenWidth / 2 - Width / 2, Graphics::ScreenWidth / 2 + Width / 2, Graphics::ScreenHeight / 2 - Height / 2, Graphics::ScreenHeight / 2 + Height / 2 };
+
 
 	FrameTimer usrft;
 	float Speed = 300;
 
-	int Health = 100;
+	float Health = 100;
 	bool IsAlive = true;
 
 	//Functions
@@ -44,6 +45,7 @@ public:
 	float GetWidth() const;
 	float GetHeight() const;
 	bool IsUserAlive() const;
+	float GetHealth() const;
 
 	//Classes
 	enum class DIRSTATE
@@ -86,7 +88,7 @@ public:
 	//Statemachine (in progress, not implemented
 	class UserState
 	{
-		virtual void Update(float dt, User& user, MainWindow& wnd) = 0;
+		virtual void Update(float dt, MainWindow& wnd) = 0;
 		virtual void Draw() {};
 		virtual void Move() {};
 		virtual bool HandleInput() {};
@@ -100,92 +102,87 @@ public:
 
 	class RunningState : UserState
 	{
-		virtual void Update(float dt, User& user, MainWindow& wnd)
+		virtual void Update(float dt, MainWindow& wnd)
 		{
-			HandleInput(wnd, user);
-			Move(user, dt);
+			HandleInput(wnd);
+			Move(dt);
 
 		};
-		virtual void HandleInput(MainWindow& wnd, User& user)
+		virtual void HandleInput(MainWindow& wnd )
 		{
 			if (wnd.kbd.KeyIsPressed('W'))
 			{
 				if (wnd.kbd.KeyIsPressed('A'))
 				{
-					user.Direction = User::DIRSTATE::NORTHWEST;
+					Direction = DIRSTATE::NORTHWEST;
 				}
 				else
 					if (wnd.kbd.KeyIsPressed('D')) {
-						user.Direction = User::DIRSTATE::NORTHEAST;
+						Direction = DIRSTATE::NORTHEAST;
 					}
 					else {
-						user.Direction = User::DIRSTATE::NORTH;
+						Direction = DIRSTATE::NORTH;
 					}
 			}
 			else
-				if (wnd.kbd.KeyIsPressed('S')) {
-
-
-
+				if (wnd.kbd.KeyIsPressed('S'))
+				{
 					if (wnd.kbd.KeyIsPressed('A'))
 					{
-						user.Direction = User::DIRSTATE::SOUTHWEST;
+						Direction = DIRSTATE::SOUTHWEST;
 					}
 					else
 						if (wnd.kbd.KeyIsPressed('D'))
 						{
-							user.Direction = User::DIRSTATE::SOUTHEAST;
+							Direction = DIRSTATE::SOUTHEAST;
 						}
 						else
 						{
-							user.Direction = User::DIRSTATE::SOUTH;
+							Direction = DIRSTATE::SOUTH;
 						}
 				}
 				else
 					if (wnd.kbd.KeyIsPressed('A')) {
-						user.Direction = User::DIRSTATE::WEST;
+						Direction = DIRSTATE::WEST;
 					}
 					else
 						if (wnd.kbd.KeyIsPressed('D')) {
-							user.Direction = User::DIRSTATE::EAST;
+							Direction = DIRSTATE::EAST;
+							
 
 						}
 						else
 						{
-							user.StateOfMovement = User::MOVSTATE::STANDING;
+							StateOfMovement = User::MOVSTATE::STANDING;
 						}
 		}
-		virtual void Move(User& user, float dt)
+		virtual void Move(float dt)
 		{
-			switch (user.Direction)
+			switch (Direction)
 			{
 			case User::DIRSTATE::NORTH:
-				user.Uservec.y -= user.Speed * dt;
+				
 				break;
 			case User::DIRSTATE::NORTHWEST:
-				user.Uservec.x -= sqrtf(user.Speed * dt);
-				user.Uservec.y -= sqrtf(user.Speed * dt);
+				
 				break;
 			case User::DIRSTATE::NORTHEAST:
-				user.Uservec.x += sqrtf(user.Speed * dt);
-				user.Uservec.y -= sqrtf(user.Speed * dt);
+				
 				break;
 			case User::DIRSTATE::SOUTH:
-				user.Uservec.y += user.Speed * dt;
+				
 				break;
 			case User::DIRSTATE::SOUTHWEST:
-				user.Uservec.x -= sqrtf(user.Speed * dt);
-				user.Uservec.y += sqrtf(user.Speed * dt);
+				
 				break;
 			case User::DIRSTATE::SOUTHEAST:
-				user.Uservec.x += sqrtf(user.Speed * dt);
-				user.Uservec.y += sqrtf(user.Speed * dt);
+				
 				break;
 			case User::DIRSTATE::WEST:
-				user.Uservec.x -= user.Speed * dt;
+				
 				break;
 			case User::DIRSTATE::EAST:
-				user.Uservec.x += user.Speed * dt;
+				
 				break;
 			};
 		}
@@ -194,25 +191,25 @@ public:
 
 	class StandingState : UserState
 	{
-		virtual void Update(float dt, User& user, MainWindow& wnd)
+		virtual void Update(float dt,  MainWindow& wnd)
 		{
-			HandleInput(wnd, user);
-			Move(user, dt);
+			HandleInput(wnd);
+			Move( dt);
 		}
-		virtual void HandleInput(MainWindow& wnd, User& user)
+		virtual void HandleInput(MainWindow& wnd)
 		{
 			if (wnd.kbd.KeyIsPressed('W'))
 			{
 				if (wnd.kbd.KeyIsPressed('A'))
 				{
-					user.Direction = User::DIRSTATE::NORTHWEST;
+					Direction = User::DIRSTATE::NORTHWEST;
 				}
 				else
 					if (wnd.kbd.KeyIsPressed('D')) {
-						user.Direction = User::DIRSTATE::NORTHEAST;
+						Direction = User::DIRSTATE::NORTHEAST;
 					}
 					else {
-						user.Direction = User::DIRSTATE::NORTH;
+						Direction = User::DIRSTATE::NORTH;
 					}
 			}
 			else
@@ -222,25 +219,25 @@ public:
 
 					if (wnd.kbd.KeyIsPressed('A'))
 					{
-						user.Direction = User::DIRSTATE::SOUTHWEST;
+						Direction = User::DIRSTATE::SOUTHWEST;
 					}
 					else
 						if (wnd.kbd.KeyIsPressed('D'))
 						{
-							user.Direction = User::DIRSTATE::SOUTHEAST;
+							Direction = User::DIRSTATE::SOUTHEAST;
 						}
 						else
 						{
-							user.Direction = User::DIRSTATE::SOUTH;
+							Direction = User::DIRSTATE::SOUTH;
 						}
 				}
 				else
 					if (wnd.kbd.KeyIsPressed('A')) {
-						user.Direction = User::DIRSTATE::WEST;
+						Direction = User::DIRSTATE::WEST;
 					}
 					else
 						if (wnd.kbd.KeyIsPressed('D')) {
-							user.Direction = User::DIRSTATE::EAST;
+							Direction = User::DIRSTATE::EAST;
 
 						}
 						else
@@ -248,7 +245,7 @@ public:
 							//add changing modes
 						}
 		}
-		virtual void Move(User& user, float dt)
+		virtual void Move(float dt)
 		{
 
 		}

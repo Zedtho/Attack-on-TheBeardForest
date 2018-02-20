@@ -4,8 +4,8 @@
 
 void User::Draw(Graphics& gfx, float dt)
 {
-	Vec2 Point0 = Vec2(Uservec.GetX(), Uservec.GetY());
-	Vec2 Point1 = Vec2(Uservec.GetX() + Width, Uservec.GetY() + Height);
+	Vec2 Point0 = Vec2(GetX(), GetY());
+	Vec2 Point1 = Vec2(GetX() + Width, GetY() + Height);
 	Vec2 SrcPoint0 = Vec2(0, 0);
 	Vec2 SrcPoint1 = Vec2(float(Width), float(Height));
 	const RectF SourceRect = RectF(SrcPoint0, SrcPoint1);
@@ -23,9 +23,9 @@ void User::Draw(Graphics& gfx, float dt)
 			NorthSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::FIGHTING:
-			for (int TempX = int(Uservec.GetX()); TempX < int(Uservec.GetX()) + Width; TempX++)
+			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
 			{
-				for (int TempY = int(Uservec.GetY()); TempY < int(Uservec.GetY()) + Height; TempY++)
+				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
 				{
 					gfx.PutPixel(TempX, TempY, 255, 255, 255);
 				}
@@ -45,9 +45,9 @@ void User::Draw(Graphics& gfx, float dt)
 			SouthSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::FIGHTING:
-			for (int TempX = int(Uservec.GetX()); TempX < int(Uservec.GetX()) + Width; TempX++)
+			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
 			{
-				for (int TempY = int(Uservec.GetY()); TempY < int(Uservec.GetY()) + Height; TempY++)
+				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
 				{
 					gfx.PutPixel(TempX, TempY, 255, 255, 255);
 				}
@@ -67,9 +67,9 @@ void User::Draw(Graphics& gfx, float dt)
 			WestSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::FIGHTING:
-			for (int TempX = int(Uservec.GetX()); TempX < int(Uservec.GetX()) + Width; TempX++)
+			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
 			{
-				for (int TempY = int(Uservec.GetY()); TempY < int(Uservec.GetY()) + Height; TempY++)
+				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
 				{
 					gfx.PutPixel(TempX, TempY, 255, 255, 255);
 				}
@@ -89,9 +89,9 @@ void User::Draw(Graphics& gfx, float dt)
 			WestSprintingAnimationHandler.DrawReverse(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::FIGHTING:
-			for (int TempX = int(Uservec.GetX()); TempX < int(Uservec.GetX()) + Width; TempX++)
+			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
 			{
-				for (int TempY = int(Uservec.GetY()); TempY < int(Uservec.GetY()) + Height; TempY++)
+				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
 				{
 					gfx.PutPixel(TempX, TempY, 255, 255, 255);
 				}
@@ -107,18 +107,18 @@ void User::Draw(Graphics& gfx, float dt)
 			NorthWestStanding.Draw(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::SPRINTING:
-			for (int TempX = int(Uservec.GetX()); TempX < int(Uservec.GetX()) + Width; TempX++)
+			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
 			{
-				for (int TempY = int(Uservec.GetY()); TempY < int(Uservec.GetY()) + Height; TempY++)
+				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
 				{
 					gfx.PutPixel(TempX, TempY, 255, 255, 255);
 				}
 			}
 			break;
 		case MOVSTATE::FIGHTING:
-			for (int TempX = int(Uservec.GetX()); TempX < int(Uservec.GetX()) + Width; TempX++)
+			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
 			{
-				for (int TempY = int(Uservec.GetY()); TempY < int(Uservec.GetY()) + Height; TempY++)
+				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
 				{
 					gfx.PutPixel(TempX, TempY, 255, 255, 255);
 				}
@@ -134,18 +134,18 @@ void User::Draw(Graphics& gfx, float dt)
 			NorthWestStanding.DrawReverse(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::SPRINTING:
-			for (int TempX = int(Uservec.GetX()); TempX < int(Uservec.GetX()) + Width; TempX++)
+			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
 			{
-				for (int TempY = int(Uservec.GetY()); TempY < int(Uservec.GetY()) + Height; TempY++)
+				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
 				{
 					gfx.PutPixel(TempX, TempY, 255, 255, 255);
 				}
 			}
 			break;
 		case MOVSTATE::FIGHTING:
-			for (int TempX = int(Uservec.GetX()); TempX < int(Uservec.GetX()) + Width; TempX++)
+			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
 			{
-				for (int TempY = int(Uservec.GetY()); TempY < int(Uservec.GetY()) + Height; TempY++)
+				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
 				{
 					gfx.PutPixel(TempX, TempY, 255, 255, 255);
 				}
@@ -165,9 +165,9 @@ void User::Draw(Graphics& gfx, float dt)
 			SouthWestSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::FIGHTING:
-			for (int TempX = int(Uservec.GetX()); TempX < int(Uservec.GetX()) + Width; TempX++)
+			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
 			{
-				for (int TempY = int(Uservec.GetY()); TempY < int(Uservec.GetY()) + Height; TempY++)
+				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
 				{
 					gfx.PutPixel(TempX, TempY, 255, 255, 255);
 				}
@@ -187,9 +187,9 @@ void User::Draw(Graphics& gfx, float dt)
 			SouthWestSprintingAnimationHandler.DrawReverse(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::FIGHTING:
-			for (int TempX = int(Uservec.GetX()); TempX < int(Uservec.GetX()) + Width; TempX++)
+			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
 			{
-				for (int TempY = int(Uservec.GetY()); TempY < int(Uservec.GetY()) + Height; TempY++)
+				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
 				{
 					gfx.PutPixel(TempX, TempY, 255, 255, 255);
 				}
@@ -247,35 +247,29 @@ bool User::Move(MainWindow& wnd, float dt)
 		return false;
 
 	}
+	const float velocity = Speed * dt;
 	switch (Direction)
 	{
 	case DIRSTATE::NORTH:
-		Uservec.y -= Speed * dt;
+		UserRect.top -= velocity;
+		UserRect.bottom -= velocity;
 		break;
 	case DIRSTATE::NORTHWEST:
-		Uservec.x -= sqrtf(Speed * dt);
-		Uservec.y -= sqrtf(Speed * dt);
 		break;
 	case DIRSTATE::NORTHEAST:
-		Uservec.x += sqrtf(Speed * dt);
-		Uservec.y -= sqrtf(Speed * dt);
 		break;
 	case DIRSTATE::SOUTH:
-		Uservec.y += Speed * dt;
+		UserRect.top += velocity;
 		break;
 	case DIRSTATE::SOUTHWEST:
-		Uservec.x -= sqrtf(Speed * dt);
-		Uservec.y += sqrtf(Speed * dt);
 		break;
 	case DIRSTATE::SOUTHEAST:
-		Uservec.x += sqrtf(Speed * dt);
-		Uservec.y += sqrtf(Speed * dt);
 		break;
 	case DIRSTATE::WEST:
-		Uservec.x -= Speed * dt;
+		UserRect.left -= velocity;
 		break;
 	case DIRSTATE::EAST:
-		Uservec.x += Speed * dt;
+		UserRect.left += velocity;
 		break;
 	}
 	StateOfMovement = MOVSTATE::SPRINTING;
@@ -306,12 +300,12 @@ void User::Update(MainWindow &wnd)
 
 float User::GetX() const
 {
-	return Uservec.GetX();
+	return UserRect.left;
 }
 
 float User::GetY() const
 {
-	return Uservec.GetY();
+	return UserRect.top;
 }
 
 float User::GetWidth() const
@@ -329,10 +323,15 @@ bool User::IsUserAlive() const
 	return IsAlive;
 }
 
-User::User(const float Given_x, const float Given_y)
+float User::GetHealth() const
 {
-	Uservec.x = Given_x;
-	Uservec.y = Given_y;
+	return Health;
+}
+
+User::User(const float Given_left, const float Given_top)
+{
+	UserRect.left = Given_left;
+	UserRect.top = Given_top;
 }
 
 
