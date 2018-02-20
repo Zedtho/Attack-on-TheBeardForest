@@ -7,7 +7,7 @@ void User::Draw(Graphics& gfx, float dt)
 	Vec2 Point0 = Vec2(GetX(), GetY());
 	Vec2 Point1 = Vec2(GetX() + Width, GetY() + Height);
 	Vec2 SrcPoint0 = Vec2(0, 0);
-	Vec2 SrcPoint1 = Vec2(float(Width), float(Height));
+	Vec2 SrcPoint1 = Vec2(Width, Height);
 	const RectF SourceRect = RectF(SrcPoint0, SrcPoint1);
 	const RectF DestRect = RectF(Point0, Point1);
 	switch (Direction)
@@ -260,6 +260,7 @@ bool User::Move(MainWindow& wnd, float dt)
 		break;
 	case DIRSTATE::SOUTH:
 		UserRect.top += velocity;
+		UserRect.bottom += velocity;
 		break;
 	case DIRSTATE::SOUTHWEST:
 		break;
@@ -267,9 +268,11 @@ bool User::Move(MainWindow& wnd, float dt)
 		break;
 	case DIRSTATE::WEST:
 		UserRect.left -= velocity;
+		UserRect.right -= velocity;
 		break;
 	case DIRSTATE::EAST:
 		UserRect.left += velocity;
+		UserRect.right += velocity;
 		break;
 	}
 	StateOfMovement = MOVSTATE::SPRINTING;
