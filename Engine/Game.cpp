@@ -34,7 +34,6 @@ Game::Game(MainWindow& wnd)
 
 void Game::Go()
 {
-
 	gfx.BeginFrame();	
 	UpdateModel();
 	ComposeFrame();
@@ -43,14 +42,16 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	// AI
 	PossiblyDamage(usr, Entities);
-	usr.Update(wnd);
 	HandleDeaths(usr, Entities);
 		if(HasNotHappened)
 		{
 			Entities.push_back(enty);
 			HasNotHappened = false;
 		}
+	// Physics
+	usr.Update(wnd);
 }
 
 void Game::ComposeFrame()

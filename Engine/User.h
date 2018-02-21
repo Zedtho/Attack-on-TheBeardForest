@@ -14,7 +14,8 @@
 
 class User
 {
-	//Data
+	//**********************************//
+	//             Data                 //
 private:
 
 	constexpr static float Width = 60;
@@ -30,13 +31,16 @@ private:
 	float Health = 100;
 	bool IsAlive = true;
 
-	//Functions
+	//**********************************//
+	//           Functions              //
 private:
 	//Logic
 	bool Move(MainWindow& wnd, float dt);
 	bool CheckIfAlive();
 
 public:
+	User() = default;
+	User(const float Given_x, const float Given_y);
 	void Draw(Graphics& gfx, float dt);
 	void TakeDamage(int DamageGiven);
 	void Update(MainWindow& kbd);
@@ -59,7 +63,7 @@ public:
 		SPRINTING, FIGHTING, STANDING
 	};
 
-
+	//Directions
 	DIRSTATE Direction = DIRSTATE::NORTH;
 	MOVSTATE StateOfMovement = MOVSTATE::STANDING;
 	
@@ -72,22 +76,18 @@ private:
 	AlphaSprite SouthStanding = AlphaSprite("Images/South/Alpha_Character_South_Standing.png");
 	AlphaSprite WestStanding = AlphaSprite("Images/West/Alpha_Character_West_Standing.png");
 	AlphaSprite NorthStanding = AlphaSprite("Images/North/Alpha_Character_North_Standing.png");
-	AlphaSprite SouthWestStanding = AlphaSprite("Images/SouthWest/Alpha_Character_SouthWest_Standing.png");
-	AlphaSprite NorthWestStanding = AlphaSprite("Images/NorthWest/Alpha_Character_NorthWest_Standing.png");
-
+	
 	Frames SouthSprintingAnim = Frames(Frames::SpriteType::Alpha, 2, "Images/South/Running/SouthRunning", ".png");
 	AnimationController SouthSprintingAnimationHandler = AnimationController(50.f / Speed, SouthSprintingAnim);
 	Frames NorthSprintingAnim = Frames(Frames::SpriteType::Alpha, 2, "Images/North/Running/NorthRunning", ".png");
 	AnimationController NorthSprintingAnimationHandler = AnimationController(50.f / Speed, NorthSprintingAnim);
 	Frames WestSprintingAnim = Frames(Frames::SpriteType::Alpha, 4, "Images/West/Running/WestRunning", ".png");
 	AnimationController WestSprintingAnimationHandler = AnimationController(35.f / Speed, WestSprintingAnim);
-	Frames SouthWestSprintingAnim = Frames(Frames::SpriteType::Alpha, 4, "Images/SouthWest/Running/SouthWestRunning", ".png");
-	AnimationController SouthWestSprintingAnimationHandler = AnimationController(40.f / Speed, SouthWestSprintingAnim);
+
 
 	
 public:
-	User() = default;
-	User(const float Given_x, const float Given_y);
+	
 	//Statemachine (in progress, not implemented)
 	class UserState
 	{

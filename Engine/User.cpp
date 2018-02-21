@@ -104,16 +104,11 @@ void User::Draw(Graphics& gfx, float dt)
 		switch (StateOfMovement)
 		{
 		case MOVSTATE::STANDING:
-			NorthWestStanding.Draw(SourceRect, DestRect, gfx);
+			WestStanding.Draw(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::SPRINTING:
-			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
-			{
-				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
-				{
-					gfx.PutPixel(TempX, TempY, 255, 255, 255);
-				}
-			}
+			WestSprintingAnimationHandler.Advance(dt);
+			WestSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::FIGHTING:
 			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
@@ -131,16 +126,11 @@ void User::Draw(Graphics& gfx, float dt)
 		switch (StateOfMovement)
 		{
 		case MOVSTATE::STANDING:
-			NorthWestStanding.DrawReverse(SourceRect, DestRect, gfx);
+			WestStanding.DrawReverse(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::SPRINTING:
-			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
-			{
-				for (int TempY = int(GetY()); TempY < int(GetY()) + Height; TempY++)
-				{
-					gfx.PutPixel(TempX, TempY, 255, 255, 255);
-				}
-			}
+			WestSprintingAnimationHandler.Advance(dt);
+			WestSprintingAnimationHandler.DrawReverse(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::FIGHTING:
 			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
@@ -158,11 +148,11 @@ void User::Draw(Graphics& gfx, float dt)
 		switch (StateOfMovement)
 		{
 		case MOVSTATE::STANDING:
-			SouthWestStanding.Draw(SourceRect, DestRect, gfx);
+			WestStanding.Draw(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::SPRINTING:
-			SouthWestSprintingAnimationHandler.Advance(dt);
-			SouthWestSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
+			WestSprintingAnimationHandler.Advance(dt);
+			WestSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::FIGHTING:
 			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
@@ -180,11 +170,11 @@ void User::Draw(Graphics& gfx, float dt)
 		switch (StateOfMovement)
 		{
 		case MOVSTATE::STANDING:
-			SouthWestStanding.DrawReverse(SourceRect, DestRect, gfx);
+			WestStanding.DrawReverse(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::SPRINTING:
-			SouthWestSprintingAnimationHandler.Advance(dt);
-			SouthWestSprintingAnimationHandler.DrawReverse(SourceRect, DestRect, gfx);
+			WestSprintingAnimationHandler.Advance(dt);
+			WestSprintingAnimationHandler.DrawReverse(SourceRect, DestRect, gfx);
 			break;
 		case MOVSTATE::FIGHTING:
 			for (int TempX = int(GetX()); TempX < int(GetX()) + Width; TempX++)
