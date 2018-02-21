@@ -88,7 +88,7 @@ private:
 public:
 	User() = default;
 	User(const float Given_x, const float Given_y);
-	//Statemachine (in progress, not implemented
+	//Statemachine (in progress, not implemented)
 	class UserState
 	{
 		virtual void Update(float dt, MainWindow& wnd, User& user) = 0;
