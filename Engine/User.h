@@ -10,7 +10,7 @@
 #include <math.h>
 
 
-
+//DONT FORGET TO MAKE SPRITES 120X70 IN THE FUTURE
 
 class User
 {
