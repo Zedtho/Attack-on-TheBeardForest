@@ -239,7 +239,7 @@ bool User::Move(MainWindow& wnd, float dt)
 	}
 	constexpr static float Sqrtof2 = 1.41421356237f;
 	const float velocity = Speed * dt;
-	const float velocityindiagonals = Speed * dt / Sqrtof2;
+	const float velocityindiagonals = Speed * dt / Sqrtof2; 
 	switch (Direction)
 	{
 	case DIRSTATE::NORTH:
@@ -345,9 +345,3 @@ User::User(const float Given_left, const float Given_top)
 	UserRect.left = Given_left;
 	UserRect.top = Given_top;
 }
-
-
-
-
-
-

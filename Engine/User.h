@@ -20,7 +20,7 @@ private:
 
 	constexpr static float Width = 60;
 	constexpr static float Height = 100;
-
+ 
 	RectF UserRect{ Graphics::ScreenWidth/2  , Graphics::ScreenHeight/ 2, Graphics::ScreenWidth / 2 + Width , Graphics::ScreenHeight/2 + Height };
 
 
@@ -67,10 +67,9 @@ public:
 	DIRSTATE Direction = DIRSTATE::NORTH;
 	MOVSTATE StateOfMovement = MOVSTATE::STANDING;
 	
-	/*static const StandingState stdstate;
-	static const RunningState rngstate;
-	UserState* StateOfMovement = *stdstate;*/
-	// Graphics
+	
+	//**********************************//
+	//           Graphics               //
 private:
 
 	AlphaSprite SouthStanding = AlphaSprite("Images/South/Alpha_Character_South_Standing.png");
@@ -256,6 +255,9 @@ public:
 
 	};
 
+	const StandingState standingstate;
+	const RunningState runningstade;
+	UserState* StateOfMovement = standingstate;
 
 
 };
