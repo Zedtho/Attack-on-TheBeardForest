@@ -94,14 +94,12 @@ public:
 		virtual void Draw(const User& user) {};
 		virtual void Move(float dt, User& user ) {};
 		virtual void HandleInput(MainWindow& wnd , User& user ) {};
+
 		//Roses are red
 		//Violets are blue
 		//If you are reading this
 		//I feel sorry for you
-
-
 	};
-
 	class RunningState : UserState
 	{
 		virtual void Update(float dt, MainWindow& wnd, User& user)
@@ -191,7 +189,6 @@ public:
 		}
 
 	};
-
 	class StandingState : UserState
 	{
 		virtual void Update(float dt,  MainWindow& wnd, User& user)
@@ -254,10 +251,14 @@ public:
 		}
 
 	};
+	class State
+	{
+	public:
+		StandingState standingstate;
+		RunningState runningstate;
+	};
 
-	const StandingState standingstate;
-	const RunningState runningstade;
-	UserState* StateOfMovement = standingstate;
+	UserState* MovementState = &State::standingstate ;
 
 
 };
