@@ -20,7 +20,6 @@ private:
 
 	constexpr static float Width = 60;
 	constexpr static float Height = 100;
- 
 	RectF UserRect{ Graphics::ScreenWidth/2  , Graphics::ScreenHeight/ 2, Graphics::ScreenWidth / 2 + Width , Graphics::ScreenHeight/2 + Height };
 
 
