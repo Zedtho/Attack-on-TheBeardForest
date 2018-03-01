@@ -35,7 +35,6 @@ private:
 	//           Functions              //
 private:
 	//Logic
-	bool Move(MainWindow& wnd, float dt);
 	bool CheckIfAlive();
 
 public:
@@ -53,19 +52,7 @@ public:
 	bool IsUserAlive() const;
 	float GetHealth() const;
 
-	//Classes
-	enum class DIRSTATE
-	{
-		WEST = 'A', EAST = 'D', NORTH = 'W', SOUTH = 'S', NORTHWEST = 'WA', NORTHEAST = 'WD', SOUTHWEST = 'SA', SOUTHEAST = 'SD'
-
-	};
-	enum class MOVSTATE {
-		SPRINTING, FIGHTING, STANDING
-	};
-
-	//Directions
-	DIRSTATE Direction = DIRSTATE::NORTH;
-	MOVSTATE StateOfMovement = MOVSTATE::STANDING;
+	
 	
 	
 	//**********************************//
@@ -87,184 +74,252 @@ private:
 	
 public:
 	
-	//Statemachine (in progress, not implemented)
-	
-	StandingState standingstate;
-	RunningState runningstate;
-	
-
-	UserState* MovementState = &standingstate ;
-
-
-};
-class UserState
-{
-public:
-	virtual void Update(float dt, MainWindow& wnd, User& user) {};
-	virtual void Draw(const User& user) {};
-	virtual void Move(float dt, User& user) {};
-	virtual void HandleInput(MainWindow& wnd, User& user) {};
-
-	//Roses are red
-	//Violets are blue
-	//If you are reading this
-	//I feel sorry for you
-};
-class RunningState : public UserState
-{
-public:
-	void Update(float dt, MainWindow& wnd, User& user)
+	//Classes
+	enum class DIRSTATE
 	{
-		HandleInput(wnd, user);
-		if (user.MovementState == &user.runningstate)
-			Move(dt, user);
-		else
-			(user.MovementState->Move(dt, user));
+		WEST = 'A', EAST = 'D', NORTH = 'W', SOUTH = 'S', NORTHWEST = 'WA', NORTHEAST = 'WD', SOUTHWEST = 'SA', SOUTHEAST = 'SD'
 
 	};
-	void HandleInput(MainWindow& wnd, User& user)
+	DIRSTATE Direction = DIRSTATE::NORTH;
+	class UserState
 	{
-		if (wnd.kbd.KeyIsPressed('W'))
-		{
-			if (wnd.kbd.KeyIsPressed('A'))
-			{
-				user.Direction = User::DIRSTATE::NORTHWEST;
-			}
-			else
-				if (wnd.kbd.KeyIsPressed('D')) {
-					user.Direction = User::DIRSTATE::NORTHEAST;
-				}
-				else {
-					user.Direction = User::DIRSTATE::NORTH;
+	public:
+		virtual void Draw(User& user, Graphics& gfx, float const dt, RectF SourceRect, RectF DestRect) {};
+		virtual void Move(float dt, User& user) {};
+		virtual void HandleInput(MainWindow& wnd, User& user) {};
 
-				}
-		}
-		else
-			if (wnd.kbd.KeyIsPressed('S'))
+		//Roses are red
+		//Violets are blue
+		//If you are reading this
+		//I feel sorry for you
+	};
+	class RunningState : public UserState
+	{
+	public:
+
+		void HandleInput(MainWindow& wnd, User& user)
+		{
+			if (wnd.kbd.KeyIsPressed('W'))
 			{
 				if (wnd.kbd.KeyIsPressed('A'))
 				{
-					user.Direction = User::DIRSTATE::SOUTHWEST;
-				}
-				else
-					if (wnd.kbd.KeyIsPressed('D'))
-					{
-						user.Direction = User::DIRSTATE::SOUTHEAST;
-					}
-					else
-					{
-						user.Direction = User::DIRSTATE::SOUTH;
-					}
-			}
-			else
-				if (wnd.kbd.KeyIsPressed('A')) {
-					user.Direction = User::DIRSTATE::WEST;
+					user.Direction = DIRSTATE::NORTHWEST;
 				}
 				else
 					if (wnd.kbd.KeyIsPressed('D')) {
-						user.Direction = User::DIRSTATE::EAST;
+						user.Direction = DIRSTATE::NORTHEAST;
+					}
+					else {
+						user.Direction = DIRSTATE::NORTH;
 
-
+					}
+			}
+			else
+				if (wnd.kbd.KeyIsPressed('S'))
+				{
+					if (wnd.kbd.KeyIsPressed('A'))
+					{
+						user.Direction = DIRSTATE::SOUTHWEST;
 					}
 					else
-					{
-						user.MovementState = &user.standingstate;
+						if (wnd.kbd.KeyIsPressed('D'))
+						{
+							user.Direction = DIRSTATE::SOUTHEAST;
+						}
+						else
+						{
+							user.Direction = DIRSTATE::SOUTH;
+						}
+				}
+				else
+					if (wnd.kbd.KeyIsPressed('A')) {
+						user.Direction = DIRSTATE::WEST;
 					}
-	}
-	void Move(float dt, User& user)
-	{
-		switch (user.Direction)
+					else
+						if (wnd.kbd.KeyIsPressed('D')) {
+							user.Direction = DIRSTATE::EAST;
+						}
+						else
+						{
+							user.MovementState = &user.standingstate;
+						}
+		}
+		void Move(float dt, User& user)
 		{
-		case User::DIRSTATE::NORTH:
+			constexpr static float Sqrtof2 = 1.41421356237f;
+			const float velocity = user.Speed * dt;
+			const float velocityindiagonals = user.Speed * dt / Sqrtof2;
+			switch (user.Direction)
+			{
+			case DIRSTATE::NORTH:
+				user.UserRect.top -= velocity;
+				user.UserRect.bottom -= velocity;
+				break;
+			case DIRSTATE::NORTHWEST:
+				user.UserRect.top -= velocityindiagonals;
+				user.UserRect.bottom -= velocityindiagonals;
+				user.UserRect.left -= velocityindiagonals;
+				user.UserRect.right -= velocityindiagonals;
+				break;
+			case DIRSTATE::NORTHEAST:
+				user.UserRect.top -= velocityindiagonals;
+				user.UserRect.bottom -= velocityindiagonals;
+				user.UserRect.left += velocityindiagonals;
+				user.UserRect.right += velocityindiagonals;
+				break;
+			case DIRSTATE::SOUTH:
+				user.UserRect.top += velocity;
+				user.UserRect.bottom += velocity;
+				break;
+			case DIRSTATE::SOUTHWEST:
+				user.UserRect.top += velocityindiagonals;
+				user.UserRect.bottom += velocityindiagonals;
+				user.UserRect.left -= velocityindiagonals;
+				user.UserRect.right -= velocityindiagonals;
 
-			break;
-		case User::DIRSTATE::NORTHWEST:
-
-			break;
-		case User::DIRSTATE::NORTHEAST:
-
-			break;
-		case User::DIRSTATE::SOUTH:
-
-			break;
-		case User::DIRSTATE::SOUTHWEST:
-
-			break;
-		case User::DIRSTATE::SOUTHEAST:
-
-			break;
-		case User::DIRSTATE::WEST:
-
-			break;
-		case User::DIRSTATE::EAST:
-
-			break;
+				break;
+			case DIRSTATE::SOUTHEAST:
+				user.UserRect.top += velocityindiagonals;
+				user.UserRect.bottom += velocityindiagonals;
+				user.UserRect.left += velocityindiagonals;
+				user.UserRect.right += velocityindiagonals;
+				break;
+			case DIRSTATE::WEST:
+				user.UserRect.left -= velocity;
+				user.UserRect.right -= velocity;
+				break;
+			case DIRSTATE::EAST:
+				user.UserRect.left += velocity;
+				user.UserRect.right += velocity;
+				break;
+			}
+		}
+		void Draw(User& user, Graphics& gfx, float const dt, RectF SourceRect, RectF DestRect) 
+		{
+			switch (user.Direction)
+			{
+			case DIRSTATE::NORTH:
+				user.NorthSprintingAnimationHandler.Advance(dt);
+				user.NorthSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::NORTHEAST:
+				user.WestSprintingAnimationHandler.Advance(dt);
+				user.WestSprintingAnimationHandler.DrawReverse(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::EAST:
+				user.WestSprintingAnimationHandler.Advance(dt);
+				user.WestSprintingAnimationHandler.DrawReverse(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::SOUTHEAST:
+				user.WestSprintingAnimationHandler.Advance(dt);
+				user.WestSprintingAnimationHandler.DrawReverse(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::SOUTH:
+				user.SouthSprintingAnimationHandler.Advance(dt);
+				user.SouthSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::SOUTHWEST:
+				user.WestSprintingAnimationHandler.Advance(dt);
+				user.WestSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::WEST:
+				user.WestSprintingAnimationHandler.Advance(dt);
+				user.WestSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::NORTHWEST:
+				user.WestSprintingAnimationHandler.Advance(dt);
+				user.WestSprintingAnimationHandler.Draw(SourceRect, DestRect, gfx);
+				break;
+			}
 		};
-	}
-	void Draw(const User& user) {};
-};
-class StandingState : public UserState
-{
-public:
-	void Update(float dt, MainWindow& wnd, User& user)
+	};
+	class StandingState : public UserState
 	{
-		HandleInput(wnd, user);
-		Move(dt, user);
-	}
-	void HandleInput(MainWindow& wnd, User& user)
-	{
-		if (wnd.kbd.KeyIsPressed('W'))
+	public:
+		void HandleInput(MainWindow& wnd, User& user)
 		{
-			if (wnd.kbd.KeyIsPressed('A'))
+			if (wnd.kbd.KeyIsPressed('W'))
 			{
-				user.Direction = User::DIRSTATE::NORTHWEST;
-			}
-			else
-				if (wnd.kbd.KeyIsPressed('D')) {
-					user.Direction = User::DIRSTATE::NORTHEAST;
-				}
-				else {
-					user.Direction = User::DIRSTATE::NORTH;
-				}
-		}
-		else
-			if (wnd.kbd.KeyIsPressed('S')) {
-
-
-
+				user.MovementState = &user.runningstate;
 				if (wnd.kbd.KeyIsPressed('A'))
 				{
-					user.Direction = User::DIRSTATE::SOUTHWEST;
-				}
-				else
-					if (wnd.kbd.KeyIsPressed('D'))
-					{
-						user.Direction = User::DIRSTATE::SOUTHEAST;
-					}
-					else
-					{
-						user.Direction = User::DIRSTATE::SOUTH;
-					}
-			}
-			else
-				if (wnd.kbd.KeyIsPressed('A')) {
-					user.Direction = User::DIRSTATE::WEST;
+					user.Direction = DIRSTATE::NORTHWEST;
 				}
 				else
 					if (wnd.kbd.KeyIsPressed('D')) {
-						user.Direction = User::DIRSTATE::EAST;
-
+						user.Direction = DIRSTATE::NORTHEAST;
+					}
+					else {
+						user.Direction = DIRSTATE::NORTH;
+					}
+			}
+			else
+				if (wnd.kbd.KeyIsPressed('S')) {
+					user.MovementState = &user.runningstate;
+					if (wnd.kbd.KeyIsPressed('A'))
+					{
+						user.Direction = DIRSTATE::SOUTHWEST;
 					}
 					else
-					{
-						//add changing modes
+						if (wnd.kbd.KeyIsPressed('D'))
+						{
+							user.Direction = DIRSTATE::SOUTHEAST;
+						}
+						else
+						{
+							user.Direction = DIRSTATE::SOUTH;
+						}
+				}
+				else
+					if (wnd.kbd.KeyIsPressed('A')) {
+						user.MovementState = &user.runningstate;
+						user.Direction = DIRSTATE::WEST;
 					}
-	}
-	void Move(float dt, User& user)
-	{
+					else
+						if (wnd.kbd.KeyIsPressed('D')) {
+							user.MovementState = &user.runningstate;
+							user.Direction = DIRSTATE::EAST;
+						}
+						else
+						{
+						}
+		}
+		void Move(float dt, User& user)
+		{
 
-	}
-	void Draw(const User& user) {};
+		}
+		void Draw(User& user, Graphics& gfx, float const dt, RectF SourceRect, RectF DestRect) 
+		{
+			switch (user.Direction)
+			{
+			case DIRSTATE::NORTH:
+				user.NorthStanding.Draw(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::NORTHEAST:
+				user.WestStanding.DrawReverse(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::EAST:
+				user.WestStanding.DrawReverse(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::SOUTHEAST:
+				user.WestStanding.DrawReverse(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::SOUTH:
+				user.SouthStanding.Draw(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::SOUTHWEST:
+				user.WestStanding.Draw(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::WEST:
+				user.WestStanding.Draw(SourceRect, DestRect, gfx);
+				break;
+			case DIRSTATE::NORTHWEST:
+				user.WestStanding.Draw(SourceRect, DestRect, gfx);
+			}
+		};
+	};
+	StandingState standingstate;
+	RunningState runningstate;
+	UserState* MovementState = &standingstate ;
 };
-
 
