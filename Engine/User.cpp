@@ -56,6 +56,10 @@ float User::GetHeight() const
 	return Height;
 }
 
+RectF User::GetRect() const {
+	return UserRect;
+}
+
 bool User::IsUserAlive() const
 {
 	return IsAlive;

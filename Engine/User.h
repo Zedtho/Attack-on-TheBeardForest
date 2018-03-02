@@ -48,6 +48,7 @@ public:
 	float GetY() const;
 	float GetWidth() const;
 	float GetHeight() const;
+	RectF GetRect() const;
 	bool IsUserAlive() const;
 	float GetHealth() const;
 

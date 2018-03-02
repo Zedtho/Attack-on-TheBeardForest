@@ -32,12 +32,12 @@ void Entity::CheckIfDead()
 
 float Entity::GetX() const
 {
-	return Entityvec.GetX();
+	return EntityRect.left;
 }
 
 float Entity::GetY() const
 {
-	return Entityvec.GetY();
+	return EntityRect.top;
 }
 
 float Entity::GetWidth() const
@@ -48,5 +48,10 @@ float Entity::GetWidth() const
 float Entity::GetHeight() const
 {
 	return Height;
+}
+
+RectF Entity::GetRect() const
+{
+	return EntityRect;
 }
 
