@@ -49,9 +49,8 @@ private:
 	/*  User Variables              */
 	/********************************/
 	std::vector<Entity> Entities; 
-	User usr;
+	User user;
 	bool GameOver = false;
 	Entity enty;
-	bool HasNotHappened = true;
 	FrameTimer DrawFt;
 };

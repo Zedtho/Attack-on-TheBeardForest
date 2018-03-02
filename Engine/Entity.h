@@ -12,16 +12,16 @@ private:
 	constexpr static float Height = 100;
 	RectF EntityRect;
 
-	int DamageValue;
-	int Health = 100;
+	float DamageValue;
+	float Health = 100;
 	bool IsAlive = true;
 
 public:
 	void CalculateDamageGiven(int DamageValue) {};
-	void TakeDamage(int DamageValue);
+	void TakeDamage(float DamageValue);
 	void Draw(Graphics& gfx);
 	void CheckIfDead();
-	Entity(float GivenX, float GivenY, int GivenDamageValue) 
+	Entity(float GivenX, float GivenY, float GivenDamageValue)
 	{ 
 	EntityRect.left = GivenX; 
 	EntityRect.top = GivenY; 

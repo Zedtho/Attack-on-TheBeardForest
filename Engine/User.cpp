@@ -36,16 +36,6 @@ void User::Update(MainWindow &wnd)
 	
 }
 
-float User::GetX() const
-{
-	return UserRect.left;
-}
-
-float User::GetY() const
-{
-	return UserRect.top;
-}
-
 float User::GetWidth() const
 {
 	return Width;
@@ -70,8 +60,23 @@ float User::GetHealth() const
 	return Health;
 }
 
+float User::GetDamageAmount() const
+{
+	return DamageAmount;
+}
+
 User::User(const float Given_left, const float Given_top)
 {
 	UserRect.left = Given_left;
 	UserRect.top = Given_top;
+}
+
+float User::GetX() const
+{
+	return UserRect.left;
+}
+
+float User::GetY() const
+{
+	return UserRect.top;
 }

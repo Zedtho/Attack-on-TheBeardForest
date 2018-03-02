@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-void Entity::TakeDamage(int DamageValue)
+void Entity::TakeDamage(float DamageValue)
 {
 	Health = Health - DamageValue;
 };

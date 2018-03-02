@@ -27,6 +27,7 @@ private:
 	
 
 	float Health = 100;
+	float DamageAmount = 50;
 	bool IsAlive = true;
 
 	//**********************************//
@@ -50,6 +51,7 @@ public:
 	RectF GetRect() const;
 	bool IsUserAlive() const;
 	float GetHealth() const;
+	float GetDamageAmount() const;
 
 	
 	

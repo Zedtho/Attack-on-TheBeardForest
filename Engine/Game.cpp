@@ -30,6 +30,7 @@ Game::Game(MainWindow& wnd)
 	
 	
 {
+	Entities.push_back(enty);
 }
 
 void Game::Go()
@@ -43,15 +44,11 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	// AI
-	PossiblyDamage(usr, Entities);
-	HandleDeaths(usr, Entities);
-		if(HasNotHappened)
-		{
-			Entities.push_back(enty);
-			HasNotHappened = false;
-		}
+	PossiblyDamage(user, Entities);
+	HandleDeaths(user, Entities);
+		
 	// Physics
-	usr.Update(wnd);
+	user.Update(wnd);
 }
 
 void Game::ComposeFrame()
@@ -62,33 +59,32 @@ void Game::ComposeFrame()
 		
 		Entities[Index].Draw(gfx);
 	}
-	usr.Draw(gfx, dt);
+	user.Draw(gfx, dt);
 
 }
 
-void Game::PossiblyDamage(User& usr, std::vector<Entity>& Entities)
+void Game::PossiblyDamage(User& user, std::vector<Entity>& Entities)
 {
-	for (int Index = 0; Index < Entities.size(); Index++)
+	for (int i = 0; i < Entities.size(); i++)
 	{
-		if (usr.GetRect().Overlaps(Entities[Index].GetRect())
+		if (user.GetRect().Overlaps(Entities[i].GetRect())
 			&& wnd.mouse.LeftIsPressed()
 			)
 		{
-			Entities[Index].TakeDamage(2);
+			Entities[i].TakeDamage(user.GetDamageAmount());
 		}
 	}
 }
 
-void Game::HandleDeaths(const User& usr, std::vector<Entity>& Entities)
+void Game::HandleDeaths(const User& user, std::vector<Entity>& Entities)
 {
-	if (usr.IsUserAlive() == false)
+	if (!user.IsUserAlive())
 	{
 		GameOver = true;
 	}
 	for (int Index = 0; Index < Entities.size(); Index++)
 	{
 		Entities[Index].CheckIfDead();
-
 	}
 
 }
