@@ -1,5 +1,4 @@
 #pragma once
-#include "MyVec2.h"
 #include "Graphics.h"
 #include "MainWindow.h"
 #include "Keyboard.h"

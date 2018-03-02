@@ -1,7 +1,7 @@
 #pragma once
 #include "Graphics.h"
-#include "MyVec2.h"
-#include "RectF.h"
+#include "Rect.h"
+
 class Entity
 {
 
