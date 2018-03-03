@@ -37,7 +37,7 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel();
-	void PossiblyDamage(User& usr, std::vector<Entity>& Entities);
+	void TestForCollisions(User& usr, std::vector<Entity>& Entities);
 	void HandleDeaths(const User& usr, std::vector<Entity>& Entities);
 	/********************************/
 	/*  User Functions              */

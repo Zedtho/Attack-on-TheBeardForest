@@ -44,7 +44,7 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	// AI
-	PossiblyDamage(user, Entities);
+	TestForCollisions(user, Entities);
 	HandleDeaths(user, Entities);
 		
 	// Physics
@@ -63,7 +63,7 @@ void Game::ComposeFrame()
 
 }
 
-void Game::PossiblyDamage(User& user, std::vector<Entity>& Entities)
+void Game::TestForCollisions(User& user, std::vector<Entity>& Entities)
 {
 	for (int i = 0; i < Entities.size(); i++)
 	{
