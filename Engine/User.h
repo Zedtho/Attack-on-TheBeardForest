@@ -39,7 +39,7 @@ public:
 	User(const float Given_x, const float Given_y);
 	void Draw(Graphics& gfx, float dt);
 	void TakeDamage(int DamageGiven);
-	void Update(MainWindow& kbd);
+	void Update(MainWindow& kbd, float dt);
 
 	//Getters
 	float GetX() const;
@@ -51,9 +51,6 @@ public:
 	float GetHealth() const;
 	float GetDamageAmount() const;
 
-	
-	
-	
 	//**********************************//
 	//           Graphics               //
 private:

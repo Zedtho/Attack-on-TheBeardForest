@@ -49,8 +49,8 @@ void Game::UpdateModel()
 	HandleDeaths(user, Entities);
 		
 	// Physics
-	user.Update(wnd);
-	for (int i = 0; i < Entities.size; i++)
+	user.Update(wnd, dt);
+	for (int i = 0; i < Entities.size(); i++)
 	{
 		Entities[i].Move(dt, user.GetRect() );
 	}

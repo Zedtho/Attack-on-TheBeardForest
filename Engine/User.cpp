@@ -27,7 +27,7 @@ void User::TakeDamage(int DamageGiven)
 	Health = Health - DamageGiven;
 }
 
-void User::Update(MainWindow &wnd)
+void User::Update(MainWindow &wnd, float dt)
 {
 	MovementState->HandleInput(wnd, *this);
 	MovementState->Move(dt, *this);
