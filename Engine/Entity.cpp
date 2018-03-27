@@ -22,6 +22,27 @@ void Entity::Draw(Graphics& gfx) {
 	}
 }
 
+void Entity::Move(float dt, RectF Target)
+{
+	Vec2f MoveBy;
+	if (Target.GetCenter().x > EntityRect.GetCenter().x)
+	{
+		MoveBy.x + 4 * dt;
+	}
+	if (Target.GetCenter().x < EntityRect.GetCenter().x)
+	{
+		MoveBy.x - 4 * dt;
+	}
+	if (Target.GetCenter.y < EntityRect.GetCenter().y)
+	{
+		MoveBy.y + 4 * dt;
+	}
+	if (Target.GetCenter.y > EntityRect.GetCenter().y)
+	{
+		MoveBy.y - 4 * dt;
+	}
+}
+
 void Entity::CheckIfDead()
 {
 	if (Health <= 0)

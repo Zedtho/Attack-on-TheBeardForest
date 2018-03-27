@@ -37,20 +37,22 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel();
-	void TestForCollisions(User& usr, std::vector<Entity>& Entities);
-	void HandleDeaths(const User& usr, std::vector<Entity>& Entities);
+	void TestForCollisions(User& user, std::vector<Entity>& Entities);
+	void HandleDeaths(const User& user, std::vector<Entity>& Entities);
 	/********************************/
 	/*  User Functions              */
+
 	/********************************/
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	/********************************/
-	std::vector<Entity> Entities; 
+	std::vector<Entity> Entities;
 	User user;
 	bool GameOver = false;
 	Entity enty;
 	FrameTimer DrawFt;
+	/********************************/
+	
 };

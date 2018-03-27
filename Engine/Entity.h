@@ -20,6 +20,7 @@ public:
 	void CalculateDamageGiven(int DamageValue) {};
 	void TakeDamage(float DamageValue);
 	void Draw(Graphics& gfx);
+	void Move(float dt, RectF Target);
 	void CheckIfDead();
 	Entity(float GivenX, float GivenY, float GivenDamageValue)
 	{ 

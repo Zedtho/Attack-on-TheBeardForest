@@ -29,7 +29,6 @@ void User::TakeDamage(int DamageGiven)
 
 void User::Update(MainWindow &wnd)
 {
-	const float dt = usrft.Mark();
 	MovementState->HandleInput(wnd, *this);
 	MovementState->Move(dt, *this);
 	CheckIfAlive();

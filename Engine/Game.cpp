@@ -43,12 +43,17 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float dt = DrawFt.Mark();
 	// AI
 	TestForCollisions(user, Entities);
 	HandleDeaths(user, Entities);
 		
 	// Physics
 	user.Update(wnd);
+	for (int i = 0; i < Entities.size; i++)
+	{
+		Entities[i].Move(dt, user.GetRect() );
+	}
 }
 
 void Game::ComposeFrame()
@@ -56,7 +61,6 @@ void Game::ComposeFrame()
 	const float dt = DrawFt.Mark();
 	for (int Index = 0; Index < Entities.size(); Index++)
 	{
-		
 		Entities[Index].Draw(gfx);
 	}
 	user.Draw(gfx, dt);
