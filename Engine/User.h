@@ -11,6 +11,7 @@
 
 //DONT FORGET TO MAKE SPRITES 120X70 IN THE FUTURE
 
+
 class User
 {
 	//**********************************//
@@ -38,7 +39,7 @@ public:
 	User() = default;
 	User(const float Given_x, const float Given_y);
 	void Draw(Graphics& gfx, float dt);
-	void TakeDamage(int DamageGiven);
+	void TakeDamage(float DamageGiven);
 	void Update(MainWindow& kbd, float dt);
 
 	//Getters
@@ -92,7 +93,6 @@ public:
 	class RunningState : public UserState
 	{
 	public:
-
 		void HandleInput(MainWindow& wnd, User& user)
 		{
 			if (wnd.kbd.KeyIsPressed('W'))

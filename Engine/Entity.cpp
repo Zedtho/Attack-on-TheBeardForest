@@ -82,3 +82,8 @@ RectF Entity::GetRect() const
 	return EntityRect;
 }
 
+float Entity::CalculateDamageGiven()
+{
+	return DamageValue;
+}
+

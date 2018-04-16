@@ -22,7 +22,7 @@ bool User::CheckIfAlive()
 	return IsAlive;
 }
 
-void User::TakeDamage(int DamageGiven)
+void User::TakeDamage(float DamageGiven)
 {
 	Health = Health - DamageGiven;
 }

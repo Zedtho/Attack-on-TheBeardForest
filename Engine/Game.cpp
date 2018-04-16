@@ -71,11 +71,9 @@ void Game::TestForCollisions(User& user, std::vector<Entity>& Entities)
 {
 	for (int i = 0; i < Entities.size(); i++)
 	{
-		if (user.GetRect().Overlaps(Entities[i].GetRect())
-			&& wnd.mouse.LeftIsPressed()
-			)
+		if (user.GetRect().Overlaps(Entities[i].GetRect()))
 		{
-			Entities[i].TakeDamage(user.GetDamageAmount());
+			user.TakeDamage(Entities[i].CalculateDamageGiven());
 		}
 	}
 }

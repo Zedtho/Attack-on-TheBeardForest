@@ -12,12 +12,12 @@ private:
 	constexpr static float Height = 100;
 	RectF EntityRect;
 
-	float DamageValue;
+	float DamageValue = 100;
 	float Health = 100;
 	bool IsAlive = true;
 
 public:
-	void CalculateDamageGiven(int DamageValue) {};
+	float CalculateDamageGiven();
 	void TakeDamage(float DamageValue);
 	void Draw(Graphics& gfx);
 	void Move(float dt, RectF Target);
